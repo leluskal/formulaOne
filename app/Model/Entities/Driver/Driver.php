@@ -37,11 +37,31 @@ class Driver
      */
     private string $country;
 
-    public function __construct(string $firstname, string $lastname, string $country)
+    /**
+     * @var int
+     * @ORM\Column(type="integer")
+     */
+    private int $numberOfPodiums;
+
+    /**
+     * @var int
+     * @ORM\Column(type="integer")
+     */
+    private int $numberOfPoints;
+
+    public function __construct(
+        string $firstname,
+        string $lastname,
+        string $country,
+        int $numberOfPodiums,
+        int $numberOfPoints
+    )
     {
         $this->firstname = $firstname;
         $this->lastname = $lastname;
         $this->country = $country;
+        $this->numberOfPodiums = $numberOfPodiums;
+        $this->numberOfPoints = $numberOfPoints;
     }
 
     /**
@@ -98,5 +118,37 @@ class Driver
     public function setCountry(string $country): void
     {
         $this->country = $country;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumberOfPodiums(): int
+    {
+        return $this->numberOfPodiums;
+    }
+
+    /**
+     * @param int $numberOfPodiums
+     */
+    public function setNumberOfPodiums(int $numberOfPodiums): void
+    {
+        $this->numberOfPodiums = $numberOfPodiums;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumberOfPoints(): int
+    {
+        return $this->numberOfPoints;
+    }
+
+    /**
+     * @param int $numberOfPoints
+     */
+    public function setNumberOfPoints(int $numberOfPoints): void
+    {
+        $this->numberOfPoints = $numberOfPoints;
     }
 }
