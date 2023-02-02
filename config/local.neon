@@ -1,5 +1,9 @@
 parameters:
-
+ doctrine:
+        host: localhost
+        user: lenka
+        password: password
+        dbname: formulaOne
 
 database:
 	dsn: 'mysql:host=127.0.0.1;dbname=test'
