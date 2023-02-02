@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Model\Entities\Driver;
+namespace App\Model\Entities\Chief;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="driver")
+ * @ORM\Table(name="chief")
  */
-class Driver
+class Chief
 {
     /**
      * @var int
