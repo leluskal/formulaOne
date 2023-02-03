@@ -2,3 +2,5 @@ services:
 	- App\Router\RouterFactory::createRouter
 	- App\Model\Repositories\DriverRepository
 	- App\AdminModule\Components\Forms\Driver\DriverFormFactory
+	- App\Model\Repositories\TeamRepository
+	- App\AdminModule\Components\Forms\Team\TeamFormFactory
