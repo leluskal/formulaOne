@@ -1,0 +1,41 @@
+{block content}
+
+<h1 class="mt-4">Drivers</h1>
+<ol class="breadcrumb mb-4">
+    <a n:href="Driver:create" class="btn btn-warning">Add Driver</a>
+</ol>
+<div class="card mb-4">
+    <div class="card-header">
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Country</th>
+                    <th>Podiums</th>
+                    <th>Points</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {foreach $drivers as $driver}
+                    <tr>
+                        <td>{$driver->getFirstname()}</td>
+                        <td>{$driver->getLastname()}</td>
+                        <td>{$driver->getCountry()}</td>
+                        <td>{$driver->getNumberOfPodiums()}</td>
+                        <td>{$driver->getNumberOfPoints()}</td>
+                        <td>
+                            <a n:href="Driver:edit, id => $driver->getId()" class="btn btn-info">Edit</a>
+                            <a n:href="deleteDriver!, id => $driver->getId()" class="btn btn-info">Delete</a>
+                        </td>
+                    </tr>
+                {/foreach}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
