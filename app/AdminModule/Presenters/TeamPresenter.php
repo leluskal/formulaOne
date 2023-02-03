@@ -24,7 +24,7 @@ class TeamPresenter extends Presenter
     {
         $form = $this->teamFormFactory->create();
 
-        $form->onFinish[] = function (TeamForm $teamForm) use ($form) {
+        $form->onFinish[] = function (TeamForm $teamForm) {
             $this->redirect('Team:default');
         };
 

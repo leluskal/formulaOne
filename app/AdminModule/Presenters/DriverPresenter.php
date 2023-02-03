@@ -24,7 +24,7 @@ class DriverPresenter extends Presenter
     {
         $form = $this->driverFormFactory->create();
 
-        $form->onFinish[] = function (DriverForm $driverForm) use ($form) {
+        $form->onFinish[] = function (DriverForm $driverForm) {
             $this->redirect('Driver:default');
         };
 
