@@ -6,3 +6,5 @@ services:
 	- App\AdminModule\Components\Forms\Team\TeamFormFactory
 	- App\Model\Repositories\ChiefRepository
 	- App\AdminModule\Components\Forms\Chief\ChiefFormFactory
+	- App\Model\Repositories\DisciplineRepository
+	- App\AdminModule\Components\Forms\Discipline\DisciplineFormFactory
