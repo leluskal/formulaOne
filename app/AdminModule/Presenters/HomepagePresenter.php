@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace App\AdminModule\Presenters;
 
-use Nette\Application\UI\Presenter;
+use App\Presenters\BasePresenter;
 
-class HomepagePresenter extends Presenter
+class HomepagePresenter extends BasePresenter
 {
 
 }

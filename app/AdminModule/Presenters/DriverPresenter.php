@@ -6,9 +6,9 @@ namespace App\AdminModule\Presenters;
 use App\AdminModule\Components\Forms\Driver\DriverForm;
 use App\AdminModule\Components\Forms\Driver\DriverFormFactory;
 use App\Model\Repositories\DriverRepository;
-use Nette\Application\UI\Presenter;
+use App\Presenters\BasePresenter;
 
-class DriverPresenter extends Presenter
+class DriverPresenter extends BasePresenter
 {
     private DriverRepository $driverRepository;
 

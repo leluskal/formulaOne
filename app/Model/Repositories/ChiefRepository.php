@@ -27,4 +27,17 @@ class ChiefRepository extends BaseRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAllForSelectBox(): array
+    {
+        $chiefs = $this->findAll();
+
+        $returnArray = [];
+
+        foreach ($chiefs as $chief) {
+            $returnArray[$chief->getId()] = $chief->getFirstname() . '  ' . $chief->getLastname();
+        }
+
+        return $returnArray;
+    }
 }

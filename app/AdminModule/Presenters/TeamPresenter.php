@@ -6,9 +6,9 @@ namespace App\AdminModule\Presenters;
 use App\AdminModule\Components\Forms\Team\TeamForm;
 use App\AdminModule\Components\Forms\Team\TeamFormFactory;
 use App\Model\Repositories\TeamRepository;
-use Nette\Application\UI\Presenter;
+use App\Presenters\BasePresenter;
 
-class TeamPresenter extends Presenter
+class TeamPresenter extends BasePresenter
 {
     private TeamRepository $teamRepository;
 

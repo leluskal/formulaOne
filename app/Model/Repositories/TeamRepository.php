@@ -27,4 +27,17 @@ class TeamRepository extends BaseRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAllForSelectBox(): array
+    {
+        $teams = $this->findAll();
+
+        $returnArray = [];
+
+        foreach ($teams as $team) {
+            $returnArray[$team->getId()] = $team->getName();
+        }
+
+        return $returnArray;
+    }
 }

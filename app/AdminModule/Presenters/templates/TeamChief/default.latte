@@ -1,0 +1,38 @@
+{block content}
+
+<h1 class="mt-4">Team Chiefs</h1>
+<ol class="breadcrumb mb-4">
+    <a n:href="TeamChief:create" class="btn btn-warning">Add</a>
+</ol>
+<div class="card mb-4">
+    <div class="card-header">
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>Team</th>
+                    <th>Chief</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {foreach $teamChiefs as $teamChief}
+                    <tr>
+                        <td>{$teamChief->getTeam()->getName()}</td>
+                        <td>
+                            {$teamChief->getChief()->getFirstName()}
+                            {$teamChief->getChief()->getLastName()}
+                        </td>
+                        <td>
+                            <a n:href="TeamChief:edit, id => $teamChief->getId()" class="btn btn-info">Edit</a>
+                            <a n:href="deleteTeamChief!, id => $teamChief->getId()" class="btn btn-info">Delete</a>
+                        </td>
+                    </tr>
+                {/foreach}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -6,9 +6,9 @@ namespace App\AdminModule\Presenters;
 use App\AdminModule\Components\Forms\Discipline\DisciplineForm;
 use App\AdminModule\Components\Forms\Discipline\DisciplineFormFactory;
 use App\Model\Repositories\DisciplineRepository;
-use Nette\Application\UI\Presenter;
+use App\Presenters\BasePresenter;
 
-class DisciplinePresenter extends Presenter
+class DisciplinePresenter extends BasePresenter
 {
     private DisciplineRepository $disciplineRepository;
 

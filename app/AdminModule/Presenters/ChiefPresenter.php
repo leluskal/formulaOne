@@ -6,9 +6,9 @@ namespace App\AdminModule\Presenters;
 use App\AdminModule\Components\Forms\Chief\ChiefForm;
 use App\AdminModule\Components\Forms\Chief\ChiefFormFactory;
 use App\Model\Repositories\ChiefRepository;
-use Nette\Application\UI\Presenter;
+use App\Presenters\BasePresenter;
 
-class ChiefPresenter extends Presenter
+class ChiefPresenter extends BasePresenter
 {
     private ChiefRepository $chiefRepository;
 

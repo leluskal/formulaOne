@@ -6,10 +6,9 @@ namespace App\AdminModule\Presenters;
 use App\AdminModule\Components\Forms\ScoreSystem\ScoreSystemForm;
 use App\AdminModule\Components\Forms\ScoreSystem\ScoreSystemFormFactory;
 use App\Model\Repositories\ScoreSystemRepository;
-use Nette\Application\UI\Form;
-use Nette\Application\UI\Presenter;
+use App\Presenters\BasePresenter;
 
-class ScoreSystemPresenter extends Presenter
+class ScoreSystemPresenter extends BasePresenter
 {
     private ScoreSystemRepository $scoreSystemRepository;
 
