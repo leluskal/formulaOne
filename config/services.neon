@@ -12,3 +12,5 @@ services:
 	- App\AdminModule\Components\Forms\ScoreSystem\ScoreSystemFormFactory
 	- App\Model\Repositories\TeamChiefRepository
 	- App\AdminModule\Components\Forms\TeamChief\TeamChiefFormFactory
+	- App\Model\Repositories\TeamDriverRepository
+	- App\AdminModule\Components\Forms\TeamDriver\TeamDriverFormFactory

@@ -1,8 +1,8 @@
 {block content}
 
-<h1 class="mt-4">Team Chiefs</h1>
+<h1 class="mt-4">Team Drivers</h1>
 <ol class="breadcrumb mb-4">
-    <a n:href="TeamChief:create, year => $year" class="btn btn-warning">Add</a>
+    <a n:href="TeamDriver:create, year => $year" class="btn btn-warning">Add</a>
 </ol>
 <div class="card mb-4">
     <div class="card-header">
@@ -13,21 +13,21 @@
                 <thead>
                 <tr>
                     <th>Team</th>
-                    <th>Chief</th>
+                    <th>Driver</th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                {foreach $teamChiefs as $teamChief}
+                {foreach $teamDrivers as $teamDriver}
                     <tr>
-                        <td>{$teamChief->getTeam()->getName()}</td>
+                        <td>{$teamDriver->getTeam()->getName()}</td>
                         <td>
-                            {$teamChief->getChief()->getFirstName()}
-                            {$teamChief->getChief()->getLastName()}
+                            {$teamDriver->getDriver()->getFirstName()}
+                            {$teamDriver->getDriver()->getLastName()}
                         </td>
                         <td>
-                            <a n:href="TeamChief:edit, id => $teamChief->getId()" class="btn btn-info">Edit</a>
-                            <a n:href="deleteTeamChief!, id => $teamChief->getId()" class="btn btn-info">Delete</a>
+                            <a n:href="TeamDriver:edit, id => $teamDriver->getId()" class="btn btn-info">Edit</a>
+                            <a n:href="deleteTeamDriver!, id => $teamDriver->getId()" class="btn btn-info">Delete</a>
                         </td>
                     </tr>
                 {/foreach}

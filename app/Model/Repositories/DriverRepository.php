@@ -27,4 +27,17 @@ class DriverRepository extends BaseRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAllForSelectBox(): array
+    {
+        $drivers = $this->findAll();
+
+        $returnArray = [];
+
+        foreach ($drivers as $driver) {
+            $returnArray[$driver->getId()] = $driver->getFirstname() . '  ' . $driver->getLastname();
+        }
+
+        return $returnArray;
+    }
 }
