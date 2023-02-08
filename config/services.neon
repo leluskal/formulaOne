@@ -8,3 +8,5 @@ services:
 	- App\AdminModule\Components\Forms\Chief\ChiefFormFactory
 	- App\Model\Repositories\DisciplineRepository
 	- App\AdminModule\Components\Forms\Discipline\DisciplineFormFactory
+	- App\Model\Repositories\ScoreSystemRepository
+	- App\AdminModule\Components\Forms\ScoreSystem\ScoreSystemFormFactory
