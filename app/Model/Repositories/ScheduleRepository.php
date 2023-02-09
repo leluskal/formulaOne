@@ -17,6 +17,18 @@ class ScheduleRepository extends BaseRepository
     }
 
     /**
+     * @return Schedule[]
+     */
+    public function findAll(): array
+    {
+        return $this->em->createQueryBuilder()
+            ->select('e')
+            ->from($this->entityName, 'e')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * @param int $year
      * @return Schedule[]
      */
@@ -30,4 +42,21 @@ class ScheduleRepository extends BaseRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAllForSelectBox(): array
+    {
+        $schedules = $this->findAll();
+
+        $returnArray = [];
+
+        foreach ($schedules as $schedule) {
+            $dateFrom = $schedule->getDateFrom()->format('d.m.Y');
+            $dateTo = $schedule->getDateTo()->format('d.m.Y');
+            $returnArray[$schedule->getId()] = $dateFrom . ' - ' . $dateTo . '  ' . $schedule->getName();
+        }
+
+        return $returnArray;
+    }
+
+
 }

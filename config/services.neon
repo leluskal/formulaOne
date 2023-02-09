@@ -16,3 +16,5 @@ services:
 	- App\AdminModule\Components\Forms\TeamDriver\TeamDriverFormFactory
 	- App\Model\Repositories\ScheduleRepository
 	- App\AdminModule\Components\Forms\Schedule\ScheduleFormFactory
+	- App\Model\Repositories\ScheduleDetailRepository
+	- App\AdminModule\Components\Forms\ScheduleDetail\ScheduleDetailFormFactory

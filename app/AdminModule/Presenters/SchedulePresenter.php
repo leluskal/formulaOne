@@ -5,6 +5,7 @@ namespace App\AdminModule\Presenters;
 
 use App\AdminModule\Components\Forms\Schedule\ScheduleForm;
 use App\AdminModule\Components\Forms\Schedule\ScheduleFormFactory;
+use App\Model\Repositories\ScheduleDetailRepository;
 use App\Model\Repositories\ScheduleRepository;
 use App\Presenters\BasePresenter;
 
@@ -14,10 +15,17 @@ class SchedulePresenter extends BasePresenter
 
     private ScheduleFormFactory $scheduleFormFactory;
 
-    public function __construct(ScheduleRepository $scheduleRepository, ScheduleFormFactory $scheduleFormFactory)
+    private ScheduleDetailRepository $scheduleDetailRepository;
+
+    public function __construct(
+        ScheduleRepository $scheduleRepository,
+        ScheduleFormFactory $scheduleFormFactory,
+        ScheduleDetailRepository $scheduleDetailRepository
+    )
     {
         $this->scheduleRepository = $scheduleRepository;
         $this->scheduleFormFactory = $scheduleFormFactory;
+        $this->scheduleDetailRepository = $scheduleDetailRepository;
     }
 
     public function createComponentScheduleForm(): ScheduleForm
@@ -60,5 +68,11 @@ class SchedulePresenter extends BasePresenter
         $this->scheduleRepository->delete($schedule);
         $this->flashMessage('The schedule record is deleted', 'info');
         $this->redirect('Schedule:default');
+    }
+
+    public function renderDetail(int $scheduleId)
+    {
+        $this->template->schedule = $this->scheduleRepository->getById($scheduleId);
+        $this->template->scheduleDetails = $this->scheduleDetailRepository->findAllByScheduleId($scheduleId);
     }
 }

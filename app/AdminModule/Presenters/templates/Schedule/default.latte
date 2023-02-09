@@ -28,6 +28,7 @@
                         <td>
                             <a n:href="Schedule:edit, id => $schedule->getId()" class="btn btn-info">Edit</a>
                             <a n:href="deleteSchedule!, id => $schedule->getId()" class="btn btn-info">Delete</a>
+                            <a n:href="Schedule:detail, scheduleId => $schedule->getId()" class="btn btn-warning">Detail</a>
                         </td>
                     </tr>
                 {/foreach}

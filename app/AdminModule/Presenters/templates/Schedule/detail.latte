@@ -1,0 +1,39 @@
+{block content}
+
+<h1 class="mt-4">
+    {$schedule->getDateFrom()->format('d.m.Y')} -
+    {$schedule->getDateTo()->format('d.m.Y')}
+    {$schedule->getName()}
+</h1>
+<ol class="breadcrumb mb-4">
+    <a n:href="ScheduleDetail:create, scheduleId => $schedule->getId()" class="btn btn-warning">Add</a>
+</ol>
+<div class="card mb-4">
+    <div class="card-header">
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>Event Date</th>
+                    <th>Discipline</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {foreach $scheduleDetails as $scheduleDetail}
+                    <tr>
+                        <td>{$scheduleDetail->getEventDate()->format('d.m.Y H:i')}</td>
+                        <td>{$scheduleDetail->getDiscipline()->getName()}</td>
+                        <td>
+                            <a n:href="ScheduleDetail:edit, id => $scheduleDetail->getId()" class="btn btn-info">Edit</a>
+{*                            <a n:href="deleteSchedule!, id => $schedule->getId()" class="btn btn-info">Delete</a>*}
+                        </td>
+                    </tr>
+                {/foreach}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

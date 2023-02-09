@@ -26,4 +26,17 @@ class DisciplineRepository extends BaseRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAllForSelectBox(): array
+    {
+        $disciplines = $this->findAll();
+
+        $returnArray = [];
+
+        foreach ($disciplines as $discipline) {
+            $returnArray[$discipline->getId()] = $discipline->getName();
+        }
+
+        return $returnArray;
+    }
 }
