@@ -28,7 +28,7 @@
                         <td>{$scheduleDetail->getDiscipline()->getName()}</td>
                         <td>
                             <a n:href="ScheduleDetail:edit, id => $scheduleDetail->getId()" class="btn btn-info">Edit</a>
-{*                            <a n:href="deleteSchedule!, id => $schedule->getId()" class="btn btn-info">Delete</a>*}
+                            <a n:href="deleteScheduleDetail!, id => $scheduleDetail->getId()" class="btn btn-info">Delete</a>
                         </td>
                     </tr>
                 {/foreach}

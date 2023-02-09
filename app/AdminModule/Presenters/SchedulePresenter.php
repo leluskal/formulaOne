@@ -5,6 +5,7 @@ namespace App\AdminModule\Presenters;
 
 use App\AdminModule\Components\Forms\Schedule\ScheduleForm;
 use App\AdminModule\Components\Forms\Schedule\ScheduleFormFactory;
+use App\Model\Repositories\RaceResultRepository;
 use App\Model\Repositories\ScheduleDetailRepository;
 use App\Model\Repositories\ScheduleRepository;
 use App\Presenters\BasePresenter;
@@ -17,15 +18,19 @@ class SchedulePresenter extends BasePresenter
 
     private ScheduleDetailRepository $scheduleDetailRepository;
 
+    private RaceResultRepository $raceResultRepository;
+
     public function __construct(
         ScheduleRepository $scheduleRepository,
         ScheduleFormFactory $scheduleFormFactory,
-        ScheduleDetailRepository $scheduleDetailRepository
+        ScheduleDetailRepository $scheduleDetailRepository,
+        RaceResultRepository $raceResultRepository
     )
     {
         $this->scheduleRepository = $scheduleRepository;
         $this->scheduleFormFactory = $scheduleFormFactory;
         $this->scheduleDetailRepository = $scheduleDetailRepository;
+        $this->raceResultRepository = $raceResultRepository;
     }
 
     public function createComponentScheduleForm(): ScheduleForm
@@ -74,5 +79,29 @@ class SchedulePresenter extends BasePresenter
     {
         $this->template->schedule = $this->scheduleRepository->getById($scheduleId);
         $this->template->scheduleDetails = $this->scheduleDetailRepository->findAllByScheduleId($scheduleId);
+    }
+
+    public function handleDeleteScheduleDetail(int $id)
+    {
+        $scheduleDetail = $this->scheduleDetailRepository->getById($id);
+
+        $this->scheduleDetailRepository->delete($scheduleDetail);
+        $this->flashMessage('The record is deleted', 'info');
+        $this->redirect('Schedule:detail', $scheduleDetail->getSchedule()->getId());
+    }
+
+    public function renderResult(int $scheduleId)
+    {
+        $this->template->schedule = $this->scheduleRepository->getById($scheduleId);
+        $this->template->raceResults = $this->raceResultRepository->findAllByScheduleId($scheduleId);
+    }
+
+    public function handleDeleteRaceResult(int $id)
+    {
+        $raceResult = $this->raceResultRepository->getById($id);
+
+        $this->raceResultRepository->delete($raceResult);
+        $this->flashMessage('The result record is deleted', 'info');
+        $this->redirect('Schedule:result', $raceResult->getSchedule()->getId());
     }
 }

@@ -1,0 +1,45 @@
+{block content}
+
+<h1 class="mt-4">
+    {$schedule->getDateFrom()->format('d.m.Y')} -
+    {$schedule->getDateTo()->format('d.m.Y')}
+    {$schedule->getName()}
+    results
+</h1>
+<ol class="breadcrumb mb-4">
+    <a n:href="RaceResult:create, scheduleId => $schedule->getId()" class="btn btn-warning">Add</a>
+</ol>
+<div class="card mb-4">
+    <div class="card-header">
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>Position</th>
+                    <th>Driver</th>
+                    <th>Points</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {foreach $raceResults as $raceResult}
+                    <tr>
+                        <td>{$raceResult->getScoreSystem()->getPosition()}.</td>
+                        <td>
+                            {$raceResult->getDriver()->getFirstname()}
+                            {$raceResult->getDriver()->getLastname()}
+                        </td>
+                        <td>{$raceResult->getScoreSystem()->getPoints()}</td>
+                        <td>
+                            <a n:href="RaceResult:edit, id => $raceResult->getId()" class="btn btn-info">Edit</a>
+                            <a n:href="deleteRaceResult!, id => $raceResult->getId()" class="btn btn-info">Delete</a>
+                        </td>
+                    </tr>
+                {/foreach}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

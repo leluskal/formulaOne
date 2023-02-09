@@ -18,3 +18,5 @@ services:
 	- App\AdminModule\Components\Forms\Schedule\ScheduleFormFactory
 	- App\Model\Repositories\ScheduleDetailRepository
 	- App\AdminModule\Components\Forms\ScheduleDetail\ScheduleDetailFormFactory
+	- App\Model\Repositories\RaceResultRepository
+	- App\AdminModule\Components\Forms\RaceResult\RaceResultFormFactory

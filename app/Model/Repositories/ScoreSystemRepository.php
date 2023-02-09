@@ -27,4 +27,17 @@ class ScoreSystemRepository extends BaseRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAllForSelectBox(): array
+    {
+        $scoreSystems = $this->findAll();
+
+        $returnArray = [];
+
+        foreach ($scoreSystems as $scoreSystem) {
+            $returnArray[$scoreSystem->getId()] = $scoreSystem->getPoints() . '. (' . $scoreSystem->getPoints() . ' pts)';
+        }
+
+        return $returnArray;
+    }
 }
