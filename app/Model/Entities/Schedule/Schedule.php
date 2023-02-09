@@ -3,9 +3,8 @@ declare(strict_types=1);
 
 namespace App\Model\Entities\Schedule;
 
-use Cassandra\Date;
 use Doctrine\ORM\Mapping as ORM;
-use Nette\Utils\DateTime;
+use DateTime;
 
 /**
  * @ORM\Entity

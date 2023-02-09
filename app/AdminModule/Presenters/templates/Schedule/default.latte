@@ -1,0 +1,38 @@
+{block content}
+
+<h1 class="mt-4">Schedule</h1>
+<ol class="breadcrumb mb-4">
+    <a n:href="Schedule:create, year => $year" class="btn btn-warning">Add</a>
+</ol>
+<div class="card mb-4">
+    <div class="card-header">
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Grand Prix</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {foreach $schedules as $schedule}
+                    <tr>
+                        <td>
+                            {$schedule->getDateFrom()->format('d.m.Y')} -
+                            {$schedule->getDateTo()->format('d.m.Y')}
+                        </td>
+                        <td>{$schedule->getName()}</td>
+                        <td>
+                            <a n:href="Schedule:edit, id => $schedule->getId()" class="btn btn-info">Edit</a>
+                            <a n:href="deleteSchedule!, id => $schedule->getId()" class="btn btn-info">Delete</a>
+                        </td>
+                    </tr>
+                {/foreach}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
