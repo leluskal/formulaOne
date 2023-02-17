@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Model\Entities\Schedule;
 
+use App\Model\Entities\ScheduleDetail\ScheduleDetail;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
@@ -44,12 +46,20 @@ class Schedule
      */
     private int $year;
 
+    /**
+     * @var ScheduleDetail[]
+     * @ORM\OneToMany(targetEntity="App\Model\Entities\ScheduleDetail\ScheduleDetail", mappedBy="schedule")
+     */
+    private $scheduleDetails;
+
     public function __construct(DateTime $dateFrom, DateTime $dateTo, string $name, int $year)
     {
         $this->dateFrom = $dateFrom;
         $this->dateTo = $dateTo;
         $this->name = $name;
         $this->year = $year;
+
+        $this->scheduleDetails = new ArrayCollection();
     }
 
     /**
@@ -122,5 +132,13 @@ class Schedule
     public function setYear(int $year): void
     {
         $this->year = $year;
+    }
+
+    /**
+     * @return ScheduleDetail[]|ArrayCollection
+     */
+    public function getScheduleDetails()
+    {
+        return $this->scheduleDetails;
     }
 }

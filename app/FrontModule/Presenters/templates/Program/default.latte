@@ -1,0 +1,35 @@
+{block content}
+
+<div class="program-class">
+    <h1>Program ({$year})</h1>
+    <br>
+    {var $actualDateTime = new \DateTime('now')}
+    <table class="table-program">
+        {foreach $schedules as $schedule}
+            <tr>
+                <th colspan="3">
+                    <h2>
+                        {$schedule->getDateFrom()->format('d.m.Y')} -
+                        {$schedule->getDateTo()->format('d.m.Y')}
+                        {$schedule->getName()}
+                    </h2>
+                </th>
+            </tr>
+            {foreach $schedule->getScheduleDetails() as $scheduleDetail}
+                <tr {if $actualDateTime > $scheduleDetail->getEventDate()}{/if}>
+                    <td>
+                        {$scheduleDetail->getEventDate()->format('d.m.Y H:i')}
+                    </td>
+                    <td>
+                        {$scheduleDetail->getDiscipline()->getName()}
+                    </td>
+                    <td>
+                        {if $actualDateTime > $scheduleDetail->getEventDate()}
+                            <i class="fas fa-check-square"></i>
+                        {/if}
+                    </td>
+                </tr>
+            {/foreach}
+        {/foreach}
+    </table>
+</div>

@@ -24,6 +24,7 @@ class DriverRepository extends BaseRepository
         return $this->em->createQueryBuilder()
             ->select('e')
             ->from($this->entityName, 'e')
+            ->orderBy('e.firstname', 'ASC')
             ->getQuery()
             ->getResult();
     }
