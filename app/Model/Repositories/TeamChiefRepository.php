@@ -30,4 +30,22 @@ class TeamChiefRepository extends BaseRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * @param int $teamId
+     * @param int $year
+     * @return TeamChief[]
+     */
+    public function findAllByTeamIdAndYear(int $teamId, int $year): array
+    {
+        return $this->em->createQueryBuilder()
+            ->select('e')
+            ->from($this->entityName, 'e')
+            ->where('e.team = :teamId')
+            ->setParameter('teamId', $teamId)
+            ->andWhere('e.year = :year')
+            ->setParameter('year', $year)
+            ->getQuery()
+            ->getResult();
+    }
 }

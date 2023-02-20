@@ -35,7 +35,7 @@ class ScoreSystemRepository extends BaseRepository
         $returnArray = [];
 
         foreach ($scoreSystems as $scoreSystem) {
-            $returnArray[$scoreSystem->getId()] = $scoreSystem->getPoints() . '. (' . $scoreSystem->getPoints() . ' pts)';
+            $returnArray[$scoreSystem->getId()] = $scoreSystem->getPosition() . '. (' . $scoreSystem->getPoints() . ' pts)';
         }
 
         return $returnArray;

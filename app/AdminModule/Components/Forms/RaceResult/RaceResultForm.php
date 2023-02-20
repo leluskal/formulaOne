@@ -60,6 +60,8 @@ class RaceResultForm extends Control
              ->setPrompt('--Choose score system--')
              ->setRequired('The score system is required');
 
+        $form->addHidden('year');
+
         $form->addSubmit('save', 'Save');
 
         $form->onSuccess[] = [$this, 'formSuccess'];
@@ -77,7 +79,8 @@ class RaceResultForm extends Control
             $raceResult = new RaceResult(
                 $schedule,
                 $driver,
-                $scoreSystem
+                $scoreSystem,
+                (int) $values->year
             );
 
             $this->raceResultRepository->save($raceResult);
@@ -90,6 +93,7 @@ class RaceResultForm extends Control
             $raceResult->setSchedule($schedule);
             $raceResult->setDriver($driver);
             $raceResult->setScoreSystem($scoreSystem);
+            $raceResult->setYear((int) $values->year);
 
             $this->raceResultRepository->save($raceResult);
             $this->getPresenter()->flashMessage('The result record is updated', 'info');

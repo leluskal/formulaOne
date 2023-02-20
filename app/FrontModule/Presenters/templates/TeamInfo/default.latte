@@ -1,0 +1,38 @@
+{block content}
+
+<div class="team-info-class">
+    <h1>Team Info {$year}</h1>
+    <br>
+    {foreach $teams as $team}
+        <span class="category-button">
+            <a n:href="TeamInfo:default, teamId => $team->getId() ">{$team->getName()}</a>
+        </span>
+    {/foreach}
+    <br><br>
+    <h2 id="destination-type-heading">
+        {if $teamId !== null}
+            {$teamName->getName()}
+        {/if}
+    </h2>
+    <br>
+    <h4>Drivers:</h4>
+    <br>
+    {foreach $teamDrivers as $teamDriver}
+        <p>
+            {$teamDriver->getDriver()->getFirstname()}
+            {$teamDriver->getDriver()->getLastname()} -
+            {number_format($teamDriver->getDriver()->getNumberOfPoints(), 0, '', ' ')} points
+            ({$teamDriver->getDriver()->getNumberOfPodiums()} podiums)
+        </p>
+    {/foreach}
+    <br>
+    <h4>Chief:</h4>
+    <br>
+    {foreach $teamChiefs as $teamChief}
+        <p>
+            {$teamChief->getChief()->getFirstname()}
+            {$teamChief->getChief()->getLastname()}
+            ({$teamChief->getChief()->getCountry()})
+        </p>
+    {/foreach}
+</div>

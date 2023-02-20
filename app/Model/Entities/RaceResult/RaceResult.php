@@ -40,11 +40,18 @@ class RaceResult
      */
     private ScoreSystem $scoreSystem;
 
-    public function __construct(Schedule $schedule, Driver $driver, ScoreSystem $scoreSystem)
+    /**
+     * @var int
+     * @ORM\Column(type="integer")
+     */
+    private int $year;
+
+    public function __construct(Schedule $schedule, Driver $driver, ScoreSystem $scoreSystem, int $year)
     {
         $this->schedule = $schedule;
         $this->driver = $driver;
         $this->scoreSystem = $scoreSystem;
+        $this->year = $year;
     }
 
     /**
@@ -101,5 +108,21 @@ class RaceResult
     public function setScoreSystem(ScoreSystem $scoreSystem): void
     {
         $this->scoreSystem = $scoreSystem;
+    }
+
+    /**
+     * @return int
+     */
+    public function getYear(): int
+    {
+        return $this->year;
+    }
+
+    /**
+     * @param int $year
+     */
+    public function setYear(int $year): void
+    {
+        $this->year = $year;
     }
 }

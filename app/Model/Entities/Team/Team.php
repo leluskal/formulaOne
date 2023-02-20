@@ -25,6 +25,12 @@ class Team
      */
     private string $name;
 
+    /**
+     * @var string|null
+     * @ORM\Column(type="string")
+     */
+    private string|null $imagePath;
+
     public function __construct(string $name)
     {
         $this->name = $name;
@@ -37,7 +43,6 @@ class Team
     {
         return $this->id;
     }
-
 
     /**
      * @return string
@@ -53,5 +58,21 @@ class Team
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImagePath(): ?string
+    {
+        return $this->imagePath;
+    }
+
+    /**
+     * @param string|null $imagePath
+     */
+    public function setImagePath(?string $imagePath): void
+    {
+        $this->imagePath = $imagePath;
     }
 }

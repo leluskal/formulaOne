@@ -14,12 +14,18 @@
                 <tr>
                     <th>Team</th>
                     <th></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 {foreach $teams as $team}
                     <tr>
                         <td>{$team->getName()}</td>
+                        <td>
+                            {if $team->getImagePath() !== ''}
+                                <img id="image-upload" src="{$basePath . $team->getImagePath()}">
+                            {/if}
+                        </td>
                         <td>
                             <a n:href="Team:edit, id => $team->getId()" class="btn btn-info">Edit</a>
                             <a n:href="deleteTeam!, id => $team->getId()" class="btn btn-info">Delete</a>

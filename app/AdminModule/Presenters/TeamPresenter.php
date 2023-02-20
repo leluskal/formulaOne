@@ -42,6 +42,8 @@ class TeamPresenter extends BasePresenter
 
         $this['teamForm']['form']['id']->setDefaultValue($team->getId());
         $this['teamForm']['form']['name']->setDefaultValue($team->getName());
+        $this['teamForm']['form']['image']->setDefaultValue($team->getImagePath());
+
     }
 
     public function renderCreate()

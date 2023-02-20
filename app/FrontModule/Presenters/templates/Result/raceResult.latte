@@ -1,0 +1,26 @@
+{block content}
+
+<div class="race-class">
+    <h1>
+        {$schedule->getDateFrom()->format('d.m.Y')} -
+        {$schedule->getDateTo()->format('d.m.Y')}
+        {$schedule->getName()}
+    </h1>
+    <br>
+    <table class="table-position">
+        {foreach $raceResults as $raceResult}
+            <tr>
+                <td>{$raceResult->getScoreSystem()->getPosition()}.</td>
+                <td>
+                    {$raceResult->getDriver()->getFirstname()}
+                    {$raceResult->getDriver()->getLastname()}
+                </td>
+                {if $raceResult->getScoreSystem()->getPoints() > 1}
+                    <td>{$raceResult->getScoreSystem()->getPoints()} points</td>
+                {else}
+                    <td>{$raceResult->getScoreSystem()->getPoints()} point</td>
+                {/if}
+            </tr>
+        {/foreach}
+    </table>
+</div>
