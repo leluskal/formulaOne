@@ -41,8 +41,9 @@ class DriverForm extends Control
         $form->addInteger('number_of_podiums', 'Number Of Podiums')
              ->setRequired('The number of podiums is required');
 
-        $form->addInteger('number_of_points', 'Number Of Points')
-             ->setRequired('The number of points is required');
+        $form->addText('number_of_points', 'Number Of Points')
+            ->addRule(Form::FLOAT, 'Write the number')
+            ->setRequired('The number of points is required');
 
         $form->addSubmit('save', 'Save');
 

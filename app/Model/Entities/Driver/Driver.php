@@ -44,17 +44,17 @@ class Driver
     private int $numberOfPodiums;
 
     /**
-     * @var int
-     * @ORM\Column(type="integer")
+     * @var float
+     * @ORM\Column(type="float")
      */
-    private int $numberOfPoints;
+    private float $numberOfPoints;
 
     public function __construct(
         string $firstname,
         string $lastname,
         string $country,
         int $numberOfPodiums,
-        int $numberOfPoints
+        float $numberOfPoints
     )
     {
         $this->firstname = $firstname;
@@ -137,17 +137,17 @@ class Driver
     }
 
     /**
-     * @return int
+     * @return float
      */
-    public function getNumberOfPoints(): int
+    public function getNumberOfPoints(): float
     {
         return $this->numberOfPoints;
     }
 
     /**
-     * @param int $numberOfPoints
+     * @param float $numberOfPoints
      */
-    public function setNumberOfPoints(int $numberOfPoints): void
+    public function setNumberOfPoints(float $numberOfPoints): void
     {
         $this->numberOfPoints = $numberOfPoints;
     }

@@ -44,7 +44,7 @@ class RaceResultRepository extends BaseRepository
             ->getResult();
     }
 
-    public function getTotalResultsByTeamIdAndYear(int $teamId, int $year): array
+    public function getTotalResultsByTeamIdAndYear(int $year): array
     {
         return $this->em->createQueryBuilder()
             ->select('t.name, SUM(ss.points) as totalPoints')
@@ -56,19 +56,6 @@ class RaceResultRepository extends BaseRepository
             ->setParameter('year', $year)
             ->groupBy('td.team')
             ->orderBy('totalPoints', 'DESC')
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function getRaceDriverResults(int $driverId): int
-    {
-        return (int) $this->em->createQueryBuilder()
-            ->select('ss.points')
-            ->from($this->entityName, 'e')
-            ->leftJoin('e.driver', 'd')
-            ->leftJoin('e.scoreSystem', 'ss')
-            ->where('e.driver = :driver_id')
-            ->setParameter('driver_id', $driverId)
             ->getQuery()
             ->getResult();
     }
@@ -115,8 +102,4 @@ class RaceResultRepository extends BaseRepository
 
         return $returnArray;
     }
-
-
-
-
 }

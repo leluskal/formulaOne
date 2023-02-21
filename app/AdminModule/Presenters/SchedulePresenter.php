@@ -94,6 +94,8 @@ class SchedulePresenter extends BasePresenter
     {
         $this->template->schedule = $this->scheduleRepository->getById($scheduleId);
         $this->template->raceResults = $this->raceResultRepository->findAllByScheduleId($scheduleId);
+
+        $this->template->year = $this->year;
     }
 
     public function handleDeleteRaceResult(int $id)

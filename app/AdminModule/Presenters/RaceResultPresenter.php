@@ -45,8 +45,9 @@ class RaceResultPresenter extends BasePresenter
         $this['raceResultForm']['form']['year']->setDefaultValue($raceResult->getYear());
     }
 
-    public function renderCreate(int $scheduleId)
+    public function renderCreate(int $scheduleId, int $year)
     {
         $this['raceResultForm']['form']['schedule_id']->setDefaultValue($scheduleId);
+        $this['raceResultForm']['form']['year']->setDefaultValue($year);
     }
 }

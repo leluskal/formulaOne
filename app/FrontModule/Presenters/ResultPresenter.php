@@ -19,7 +19,7 @@ class ResultPresenter extends BasePresenter
         $this->scheduleRepository = $scheduleRepository;
     }
 
-    public function renderDefault(string $type = null, $teamId = null)
+    public function renderDefault(string $type = null)
     {
         if ($type === 'races') {
             $this->template->schedules = $this->scheduleRepository->findAllByYear((int) $this->year);
@@ -27,10 +27,12 @@ class ResultPresenter extends BasePresenter
 
         if ($type === 'drivers') {
             $this->template->driverResults = $this->raceResultRepository->getTotalResultsByYear((int) $this->year);
+
+            bdump($this->template->driverResults);
         }
 
         if ($type === 'teams') {
-            $this->template->teamResults = $this->raceResultRepository->getTotalResultsByTeamIdAndYear((int) $teamId, (int) $this->year);
+            $this->template->teamResults = $this->raceResultRepository->getTotalResultsByTeamIdAndYear((int) $this->year);
         }
 
         $this->template->type = $type;
