@@ -26,8 +26,16 @@
                         <td>{$driver->getFirstname()}</td>
                         <td>{$driver->getLastname()}</td>
                         <td>{$driver->getCountry()}</td>
-                        <td>{$driver->getNumberOfPodiums()}</td>
-                        <td>{$driver->getNumberOfPoints()}</td>
+                        {ifset $podiumsIndexedByDriverId[$driver->getId()]}
+                            <td>{$driver->getNumberOfPodiums() + 1}</td>
+                        {else}
+                            <td>{$driver->getNumberOfPodiums()}</td>
+                        {/ifset}
+                        {ifset $pointsIndexedByDriverId[$driver->getId()]}
+                            <td>{$driver->getNumberOfPoints() + $pointsIndexedByDriverId[$driver->getId()]}</td>
+                        {else}
+                            <td>{$driver->getNumberOfPoints()}</td>
+                        {/ifset}
                         <td>
                             <a n:href="Driver:edit, id => $driver->getId()" class="btn btn-info">Edit</a>
                             <a n:href="deleteDriver!, id => $driver->getId()" class="btn btn-info">Delete</a>

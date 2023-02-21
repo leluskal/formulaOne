@@ -6,6 +6,7 @@ namespace App\AdminModule\Presenters;
 use App\AdminModule\Components\Forms\Driver\DriverForm;
 use App\AdminModule\Components\Forms\Driver\DriverFormFactory;
 use App\Model\Repositories\DriverRepository;
+use App\Model\Repositories\RaceResultRepository;
 use App\Presenters\BasePresenter;
 
 class DriverPresenter extends BasePresenter
@@ -14,10 +15,17 @@ class DriverPresenter extends BasePresenter
 
     private DriverFormFactory $driverFormFactory;
 
-    public function __construct(DriverRepository $driverRepository, DriverFormFactory $driverFormFactory)
+    private RaceResultRepository $raceResultRepository;
+
+    public function __construct(
+        DriverRepository $driverRepository,
+        DriverFormFactory $driverFormFactory,
+        RaceResultRepository $raceResultRepository
+    )
     {
         $this->driverRepository = $driverRepository;
         $this->driverFormFactory = $driverFormFactory;
+        $this->raceResultRepository = $raceResultRepository;
     }
 
     public function createComponentDriverForm(): DriverForm
@@ -34,6 +42,9 @@ class DriverPresenter extends BasePresenter
     public function renderDefault()
     {
         $this->template->drivers = $this->driverRepository->findAll();
+
+        $this->template->pointsIndexedByDriverId = $this->raceResultRepository->getPointsIndexedByDriverId();
+        $this->template->podiumsIndexedByDriverId = $this->raceResultRepository->getPodiumsIndexedByDriverId();
     }
 
     public function renderEdit(int $id)

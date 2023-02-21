@@ -32,7 +32,7 @@ class RaceResultRepository extends BaseRepository
     public function getTotalResultsByYear(int $year): array
     {
         return $this->em->createQueryBuilder()
-            ->select('d.firstname', 'd.lastname, SUM(ss.points) as totalPoints')
+            ->select('d.firstname', 'd.lastname, d.id, SUM(ss.points) as totalPoints')
             ->from($this->entityName, 'e')
             ->leftJoin('e.driver', 'd')
             ->leftJoin('e.scoreSystem', 'ss')
@@ -47,7 +47,7 @@ class RaceResultRepository extends BaseRepository
     public function getTotalResultsByTeamIdAndYear(int $teamId, int $year): array
     {
         return $this->em->createQueryBuilder()
-            ->select('t.name, t.name, SUM(ss.points) as totalPoints')
+            ->select('t.name, SUM(ss.points) as totalPoints')
             ->from($this->entityName, 'e')
             ->join(TeamDriver::class, 'td', Join::WITH, 'td.driver = e.driver')
             ->leftJoin('e.scoreSystem', 'ss')
@@ -55,8 +55,68 @@ class RaceResultRepository extends BaseRepository
             ->where('e.year = :year')
             ->setParameter('year', $year)
             ->groupBy('td.team')
-//            ->orderBy('totalPoints', 'DESC')
+            ->orderBy('totalPoints', 'DESC')
             ->getQuery()
             ->getResult();
     }
+
+    public function getRaceDriverResults(int $driverId): int
+    {
+        return (int) $this->em->createQueryBuilder()
+            ->select('ss.points')
+            ->from($this->entityName, 'e')
+            ->leftJoin('e.driver', 'd')
+            ->leftJoin('e.scoreSystem', 'ss')
+            ->where('e.driver = :driver_id')
+            ->setParameter('driver_id', $driverId)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getPointsIndexedByDriverId()
+    {
+        $driversResults = $this->em->createQueryBuilder()
+            ->select('d.firstname', 'd.lastname, d.id, SUM(ss.points) as totalPoints')
+            ->from($this->entityName, 'e')
+            ->leftJoin('e.driver', 'd')
+            ->leftJoin('e.scoreSystem', 'ss')
+            ->groupBy('d.id')
+            ->orderBy('totalPoints', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        $returnArray = [];
+
+        foreach ($driversResults as $driversResult) {
+            $returnArray[$driversResult['id']] = (int) $driversResult['totalPoints'];
+        }
+
+        return $returnArray;
+    }
+
+    public function getPodiumsIndexedByDriverId()
+    {
+        $driversPositions = $this->em->createQueryBuilder()
+            ->select('d.firstname', 'd.lastname, d.id, ss.position')
+            ->from($this->entityName, 'e')
+            ->leftJoin('e.driver', 'd')
+            ->leftJoin('e.scoreSystem', 'ss')
+//            ->groupBy('d.id')
+            ->getQuery()
+            ->getResult();
+
+        $returnArray = [];
+
+        foreach ($driversPositions as $driverPosition) {
+            if ($driverPosition['position'] <= 3) {
+                $returnArray[$driverPosition['id']] = (int) $driverPosition['position'];
+            }
+        }
+
+        return $returnArray;
+    }
+
+
+
+
 }

@@ -17,22 +17,34 @@
     <br>
     <h4>Drivers:</h4>
     <br>
-    {foreach $teamDrivers as $teamDriver}
-        <p>
-            {$teamDriver->getDriver()->getFirstname()}
-            {$teamDriver->getDriver()->getLastname()} -
-            {number_format($teamDriver->getDriver()->getNumberOfPoints(), 0, '', ' ')} points
-            ({$teamDriver->getDriver()->getNumberOfPodiums()} podiums)
-        </p>
-    {/foreach}
-    <br>
-    <h4>Chief:</h4>
-    <br>
-    {foreach $teamChiefs as $teamChief}
-        <p>
-            {$teamChief->getChief()->getFirstname()}
-            {$teamChief->getChief()->getLastname()}
-            ({$teamChief->getChief()->getCountry()})
-        </p>
-    {/foreach}
+    {if $teamId !== null}
+        {foreach $teamDrivers as $teamDriver}
+            <p>
+                {$teamDriver->getDriver()->getFirstname()}
+                {$teamDriver->getDriver()->getLastname()} -
+                {ifset $pointsIndexedByDriverId[$teamDriver->getDriver()->getId()]}
+                    {number_format($teamDriver->getDriver()->getNumberOfPoints()
+                    + $pointsIndexedByDriverId[$teamDriver->getDriver()->getId()], 0, '', ' ')}
+                    points
+                {else}
+                    {number_format($teamDriver->getDriver()->getNumberOfPoints(), 0, '', ' ')} points
+                {/ifset}
+                {ifset $podiumsIndexedByDriverId[$teamDriver->getDriver()->getId()]}
+                    ({$teamDriver->getDriver()->getNumberOfPodiums() + 1} podiums)
+                {else}
+                    ({$teamDriver->getDriver()->getNumberOfPodiums()} podiums)
+                {/ifset}
+            </p>
+        {/foreach}
+        <br>
+        <h4>Chief:</h4>
+        <br>
+        {foreach $teamChiefs as $teamChief}
+            <p>
+                {$teamChief->getChief()->getFirstname()}
+                {$teamChief->getChief()->getLastname()}
+                ({$teamChief->getChief()->getCountry()})
+            </p>
+        {/foreach}
+    {/if}
 </div>
